@@ -1,9 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState ,useContext } from 'react'
+import { AppointmentContext } from '../context/AppointmentContext';
+import { useNavigate } from 'react-router-dom';
 
-export default function AppointmentForm({addAppointment}) {
+export default function AppointmentForm() {
+  const { addAppointment } = useContext(AppointmentContext);
+
   const [title, setTitle] = useState('')
   const [detail,setDetail] = useState('')
   const [date,setDate] = useState('')
+  const navigate  = useNavigate()
 
   const handleSubmit = (e )=>{
     e.preventDefault();
@@ -23,11 +28,13 @@ export default function AppointmentForm({addAppointment}) {
     setTitle('');
     setDate('');
     setDetail('');
+    navigate('/lists-appointment')
   }
   return (
-    <div>
+    <div className="justify-content-center align-items-center">
       <form onSubmit={handleSubmit} className="form-floating">
-      <h3>AppointmentFrom</h3>
+      <h3>Appointment Basic App With React Bootstrap
+      </h3>
       <div className="mb-3">
         <label htmlFor="title" className="form-label">Title</label>
         <input

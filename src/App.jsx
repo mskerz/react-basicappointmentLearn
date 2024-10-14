@@ -1,35 +1,23 @@
-import { useState } from 'react'
-import moment from 'moment/min/moment-with-locales'
-import './App.css'
-import AppointmentList from './components/ApppointmentList'
-import AppointmentForm from './components/AppointmentForm'
+// App.js
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import AppointmentList from './components/ApppointmentList'; // สมมติว่ามีคอมโพเนนต์ AppointmentList
+import AppointmentForm from './components/AppointmentForm'; // สมมติว่ามีคอมโพเนนต์สำหรับเพิ่มนัด
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [appointments,setAppointments] = useState([])
-
-
-  const addAppointments = (newapp)=>{
-    const newAppointments = [...appointments,newapp]
-    setAppointments(newAppointments)
-  };
-
-  const removeAppointments = (indexRemove)=>{
-      const updateAppointments = appointments.filter((_,index)=>index !=indexRemove)  
-      setAppointments(updateAppointments)
-  }
-
-   
   return (
-    <>
+
+    <Router>
       <div className="container">
-      <AppointmentForm addAppointment={addAppointments}/>
-      <div className="mt-5">
-      <AppointmentList appointment={appointments} onDelete={removeAppointments}/>
+        <Routes>
+          
+          <Route path="/" element={<AppointmentForm /> } />
+          <Route path="/lists-appointment" element={<AppointmentList />} />
+        </Routes>
       </div>
-      </div>
-    </>
-  )
+    </Router>
+
+  );
 }
 
-export default App
+export default App;
